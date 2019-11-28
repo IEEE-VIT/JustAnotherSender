@@ -1,0 +1,33 @@
+{
+  "name": "justanothersender",
+  "version": "1.0.0",
+  "description": "Auto mailing API",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js -e js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sarthakpranesh/JustAnotherSender.git"
+  },
+  "keywords": [
+    "Mailing",
+    "Mail",
+    "Email",
+    "API"
+  ],
+  "author": "Sarthak Pranesh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sarthakpranesh/JustAnotherSender/issues"
+  },
+  "homepage": "https://github.com/sarthakpranesh/JustAnotherSender#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.1"
+  }
+}
