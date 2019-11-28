@@ -1,7 +1,17 @@
 const express = require("express")
 const app = express()
+const bodyParser = require('body-parser')
 
-//default route for init commit
+
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+
+
+//importing routes
+const route = require("./routes/route.js")
+
+app.use(route)
+//default route
 app.use((req, res, next)=>{
     res.status(200).send({
         apiStatus: 1,
@@ -11,9 +21,6 @@ app.use((req, res, next)=>{
     })
     return
 })
-
-
-
 
 const port = 8080 || process.env.PORT
 
