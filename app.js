@@ -1,8 +1,11 @@
 const express = require("express")
 const app = express()
 const bodyParser = require('body-parser')
+const path = require("path")
 
-
+app.use(express.static('public'))
+app.set('views', path.join(__dirname, '/template'));
+app.set('view engine', 'hbs');
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
@@ -13,13 +16,7 @@ const route = require("./routes/route.js")
 app.use(route)
 //default route
 app.use((req, res, next)=>{
-    res.status(200).send({
-        apiStatus: 1,
-        payload:{
-            msg: "Api working"
-        }
-    })
-    return
+    res.render("index.hbs")
 })
 
 const port = 8080 || process.env.PORT

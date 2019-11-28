@@ -9,8 +9,19 @@ const arrayEmail = (req, res, next)=>{
             })
             return
         }
+        if([undefined, null].includes(req.body.html) || req.body.emails.html === 0){
+            res.status(200).send({
+                apiStatus: 2,
+                payload: {
+                    msg: "Make sure that html code is provided"
+                }
+            })
+            return
+        }
+        const html = req.body.html
         const arrayOfEmails = req.body.emails
         req.emails = arrayOfEmails
+        req.html = html
         next()
     } catch(err){
         console.log(err.message)
