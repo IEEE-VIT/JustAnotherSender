@@ -50,6 +50,8 @@ document.getElementById("request").addEventListener("click", ()=>{
             document.getElementById("extractedEmails").innerText = JSON.stringify(tmp.payload.emailsExtracted)
         } else if(tmp.apiStatus === 2){
             alert(tmp.payload.msg)
+        } else if(tmp.apiStatus === 5){
+            alert(tmp.payload.msg + ". " + tmp.payload.errorMsg)
         }
     })
     .catch((err)=>{

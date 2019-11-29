@@ -13,8 +13,11 @@ const sendEmail = (emails, html, sender, subject)=>{
                 html: html,
               };
             sgMail.sendMultiple(msg)
-                .catch((err)=>console.log(err.response.body))
-                resolve()
+                .then((resp)=>resolve())
+                .catch((err)=>{
+                    console.log(err.response.body)
+                    reject(err.response.body)
+                })
         } catch(err){
             reject()
         }

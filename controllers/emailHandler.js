@@ -13,9 +13,10 @@ const arrayEmailSender = (emails, html, sender, subject)=>{
             })
         } catch(err){
             reject({
-                apiStatus: 500,
+                apiStatus: 5,
                 payload: {
-                    msg: "Service Not currently available!"
+                    msg: "Service Not currently available!",
+                    errorMsg: err.message
                 }
             })
         }
