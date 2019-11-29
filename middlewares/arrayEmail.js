@@ -1,6 +1,8 @@
-const arrayEmail = (req, res, next)=>{
+const emailHandler = require("../controllers/emailHandler")
+
+const arrayEmail = async (req, res, next)=>{
     try{
-        if([undefined, null].includes(req.body.emails) || req.body.emails.length === 0){
+        if([undefined, null].includes(req.body)){
             res.status(200).send({
                 apiStatus: 2,
                 payload: {
@@ -9,28 +11,10 @@ const arrayEmail = (req, res, next)=>{
             })
             return
         }
-        if([undefined, null].includes(req.body.html) || req.body.emails.html === 0){
-            res.status(200).send({
-                apiStatus: 2,
-                payload: {
-                    msg: "Make sure that html code is provided"
-                }
-            })
-            return
-        }
-        if(req.body.secret !== process.env.SECRET){
-            res.status(400).send({
-                apiStatus: 2,
-                payload: {
-                    msg: "Hmm, looks like you have no access to the service"
-                }
-            })
-            return
-        }
-        const html = req.body.html
-        const arrayOfEmails = req.body.emails
+        const jsonData = req.body
+        const arrayOfEmails =  await emailHandler.extractEmails(jsonData, "email")
         req.emails = arrayOfEmails
-        req.html = html
+        req.noOfEmails = arrayEmail.length
         next()
     } catch(err){
         console.log(err.message)
