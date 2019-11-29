@@ -6,8 +6,14 @@ document.getElementById("request").addEventListener("click", ()=>{
         alert("No field can be empty")
         return
     }
+    try{
+        json = JSON.parse(complexJson)
+    } catch(err){
+        alert("That doesn't look like a valid JSON")
+        return
+    }
     const data = {
-        json: JSON.parse(complexJson),
+        json,
         html: htmlVar,
         secret: secretVar
     }
