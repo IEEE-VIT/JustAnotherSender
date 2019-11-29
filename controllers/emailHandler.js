@@ -1,9 +1,9 @@
 const sendGrid = require("./sendGrid.js")
 
-const arrayEmailSender = (emails, html, senderEmail)=>{
+const arrayEmailSender = (emails, html, sender, subject)=>{
     return new Promise(async (resolve, reject)=>{
         try{
-            await sendGrid.sendEmail(emails, html, senderEmail)
+            await sendGrid.sendEmail(emails, html, sender, subject)
             resolve({
                 apiStatus: 1,
                 payload: {
