@@ -11,7 +11,7 @@ const sendEmail = (emails)=>{
                 from: 'limphned@gmail.com',
                 subject: 'The Enigma Is Going To Come Tomorrow',
                 text: 'and easy to do anywhere, even with Node.js',
-                html: '<h1>Some Text</h1>',
+                html: '<h1>This is a Test Email sending Pipeline, please ignore. If this message is in spam please inform me</h1>',
               };
             sgMail.sendMultiple(msg)
                 .catch((err)=>console.log(err.response.body))

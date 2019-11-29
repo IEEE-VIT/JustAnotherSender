@@ -1,6 +1,8 @@
-const arrayEmail = (req, res, next)=>{
+const emailHandler = require("../controllers/emailHandler")
+
+const arrayEmail = async (req, res, next)=>{
     try{
-        if([undefined, null].includes(req.body.emails) || req.body.emails.length === 0){
+        if([undefined, null].includes(req.body)){
             res.status(200).send({
                 apiStatus: 2,
                 payload: {
@@ -9,8 +11,10 @@ const arrayEmail = (req, res, next)=>{
             })
             return
         }
-        const arrayOfEmails = req.body.emails
+        const jsonData = req.body
+        const arrayOfEmails =  await emailHandler.extractEmails(jsonData, "email")
         req.emails = arrayOfEmails
+        req.noOfEmails = arrayEmail.length
         next()
     } catch(err){
         console.log(err.message)
