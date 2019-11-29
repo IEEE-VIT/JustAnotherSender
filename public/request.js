@@ -1,17 +1,16 @@
 document.getElementById("request").addEventListener("click", ()=>{
-    const htmlVar = document.getElementById("html").value
-    const emailsVar = document.getElementById("emails").value
-    const secretVar = document.getElementById("secret").value
-    console.log(typeof(emailsVar))
-    const arrayOfEmails = emailsVar.split(",").trim()
-    console.log(arrayOfEmails)
+    const htmlVar = document.getElementById("html")
+    const complexJson = document.getElementById("complexJson")
+    const secretVar = document.getElementById("secret")
+    const data = JSON.stringify({
+        json: complexJson.value,
+        html: htmlVar.value,
+        secret: secretVar.value
+    })
+    console.log(data)
     fetch("/sendEmails", {
         method: 'post',
-        body: JSON.stringify({
-            emails: arrayOfEmails,
-            html: htmlVar,
-            secret: secretVar
-        })
+        body: data
     })
     .then(async (resp)=>{
         const tmp = await resp.json()
