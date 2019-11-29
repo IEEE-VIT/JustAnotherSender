@@ -5,7 +5,7 @@ const arrayEmailSender = (emails, html)=>{
         try{
             sendGrid.sendEmail(emails, html)
             resolve({
-                apiStatus: 2,
+                apiStatus: 1,
                 payload: {
                     msg: "Emails are Being Sent"
                 }

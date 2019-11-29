@@ -18,6 +18,15 @@ const arrayEmail = (req, res, next)=>{
             })
             return
         }
+        if(req.body.secret !== process.env.SECRET){
+            res.status(400).send({
+                apiStatus: 2,
+                payload: {
+                    msg: "Hmm, looks like you have no access to the service"
+                }
+            })
+            return
+        }
         const html = req.body.html
         const arrayOfEmails = req.body.emails
         req.emails = arrayOfEmails
