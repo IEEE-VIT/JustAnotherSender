@@ -1,9 +1,16 @@
+const emailRegEx = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
 document.getElementById("request").addEventListener("click", ()=>{
     const htmlVar = document.getElementById("html").value
+    const senderEmail = document.getElementById("senderEmail").value
     const complexJson = document.getElementById("complexJson").value
     const secretVar = document.getElementById("secret").value
-    if(htmlVar === "" || complexJson === "" || secretVar === ""){
+    if(htmlVar === "" || complexJson === "" || secretVar === "" || senderEmail === ""){
         alert("No field can be empty")
+        return
+    }
+    console.log(!senderEmail.match(emailRegEx))
+    if(!senderEmail.match(emailRegEx)){
+        alert("Sorry that is not a valid sender email id")
         return
     }
     try{
@@ -13,6 +20,7 @@ document.getElementById("request").addEventListener("click", ()=>{
         return
     }
     const data = {
+        sender: senderEmail,
         json,
         html: htmlVar,
         secret: secretVar
