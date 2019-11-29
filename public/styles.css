@@ -26,6 +26,11 @@ body{
     color: red;
 }
 
+#compiledHTML{
+    width: 100%;
+    height: 400px;
+}
+
 .email-input {
     height: 400px;
     width: 100%;
@@ -36,9 +41,24 @@ body{
 }
 
 .secret-container{
-    height: 200px;
+    height: auto;
     width: 100%;
     margin-top: 40px;
     padding: 10px;
     background-color: palegoldenrod;
+}
+
+#extractedEmails{
+    margin-top: 10px;
+    height: 200px;
+    width: 100%;
+    color: black;
+    padding: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+    .main-header h1{
+        margin: auto;
+        font-size: 30px;
+    }
 }

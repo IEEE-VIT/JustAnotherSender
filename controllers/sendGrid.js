@@ -4,7 +4,6 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const sendEmail = (emails, html)=>{
     return new Promise(async (resolve, reject)=>{
-        console.log(emails)
         try{
             const msg = {
                 to: emails,

@@ -13,6 +13,7 @@ const arrayEmail = async (req, res, next)=>{
         }
         const jsonData = req.body.json
         const arrayOfEmails =  await emailHandler.extractEmails(jsonData, "email")
+        console.log(arrayOfEmails)
         req.emails = arrayOfEmails
         next()
     } catch(err){

@@ -3,11 +3,11 @@ const app = express()
 const bodyParser = require('body-parser')
 const path = require("path")
 
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 app.use(express.static('public'))
 app.set('views', path.join(__dirname, '/template'));
 app.set('view engine', 'hbs');
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
 
 
 //importing routes
