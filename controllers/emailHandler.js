@@ -1,9 +1,9 @@
 const sendGrid = require("./sendGrid.js")
 
-const arrayEmailSender = (emails, html)=>{
+const arrayEmailSender = (emails, html, sender, subject)=>{
     return new Promise(async (resolve, reject)=>{
         try{
-            sendGrid.sendEmail(emails, html)
+            await sendGrid.sendEmail(emails, html, sender, subject)
             resolve({
                 apiStatus: 1,
                 payload: {
@@ -13,9 +13,10 @@ const arrayEmailSender = (emails, html)=>{
             })
         } catch(err){
             reject({
-                apiStatus: 500,
+                apiStatus: 5,
                 payload: {
-                    msg: "Service Not currently available!"
+                    msg: "Service Not currently available!",
+                    errorMsg: err.message
                 }
             })
         }
