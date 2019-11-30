@@ -5,7 +5,8 @@ document.getElementById("request").addEventListener("click", ()=>{
     const complexJson = document.getElementById("complexJson").value
     const subject = document.getElementById("subject").value
     const secretVar = document.getElementById("secret").value
-    if(htmlVar === "" || complexJson === "" || secretVar === "" || senderEmail === "" || subject === ""){
+    const nameOfEmail = document.getElementById("nameOfEmail").value
+    if(htmlVar === "" || complexJson === "" || secretVar === "" || senderEmail === "" || subject === "" || nameOfEmail === ""){
         alert("No field can be empty")
         return
     }
@@ -28,7 +29,8 @@ document.getElementById("request").addEventListener("click", ()=>{
         subject,
         json,
         html: htmlVar,
-        secret: secretVar
+        secret: secretVar,
+        nameOfEmail,
     }
     console.log(data)
     fetch("/sendEmails", {
