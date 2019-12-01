@@ -1,9 +1,9 @@
-const nodeEmailSender = require("./nodeEmailSender")
+const awsSes = require("./awsSes")
 
 const arrayEmailSender = (emails, html, sender, subject, nameOfEmail)=>{
     return new Promise(async (resolve, reject)=>{
         try{
-            const resp = await nodeEmailSender.sendEmails(emails, html, sender, subject, nameOfEmail)
+            const resp = await awsSes.awsMailer(emails, html, sender, subject, nameOfEmail)
             resolve({
                 apiStatus: 1,
                 payload: {
