@@ -1,43 +1,46 @@
 const aws = require("aws-sdk")
+const path = require("path")
 
-//this should be email of sender I guess
-var email = "sarthakpranesh08@gmail.com"
+aws.config.update({
+    accessKeyId: process.env.ACCESS_KEY_ID,
+    secretAccessKey: process.env.SECRET_ACCESS_KEY,
+    region: "ap-south-1"
+  });
 
-//loads up the configuration of the aws ses instance
-aws.config.loadFromPath(__dirname, "/config.json")
-
-const ses = new aws.SES()
+const ses = new aws.SES({ apiVersion: "2010-12-01" })
 
 const awsMailer = (emails, html, senderEmail, subject, nameOfEmail)=>{
     return new Promise((resolve, reject)=>{
-        try{
-            var sesMail = "From: "+nameOfEmail+" <"+senderEmail+">\n"
-                sesMail = sesMail + "To: " + emails + "\n"
-                sesMail = sesMail + "Subject: " + subject + "\n"
-                sesMail = sesMail + "MIME-version: 1.0\n"
-                sesMail = sesMail + "Content-Type: multipart/mixed; boundary=\"NextPart\"\n\n"
-                sesMail = sesMail + "--NextPart\n"
-                sesMail = sesMail + "Content-Type: text/html; charset=us-ascii\n\n"
-                sesMail = sesMail + html
-                sesMail = sesMail + "--NextPart\n"
-                sesMail = sesMail + "Content-Type: text/plain;\n"
-                sesMail = sesMail + "--NextPart"
+        const params = {
+            Destination: {
+                ToAddresses: emails // Email address/addresses that you want to send your email
+            },
+            Message: {
+                Body: {
+                Html: {
+                    // HTML Format of the email
+                    Charset: "UTF-8",
+                    Data: html, 
+                },
+                },
+                Subject: {
+                Charset: "UTF-8",
+                Data: subject,
+                }
+            },
+            Source: nameOfEmail+" <" + senderEmail + "> "
+            };
 
-            console.log(sesMail)
-
-            //defining email template to be sent
-            const finalEmailTemplate = {
-                RawMessage: { Data: new Buffer(sesMail) },
-                Destinations: emails,
-                Source: "'AWS Tutorial Series' <" + email + ">" 
-            }
-            const respSes = ses.sendRawEmail(finalEmailTemplate)
-            console.log(respSes)
-            resolve()
-        } catch(err){
-            console.log(err)
-            reject(err)
-        }
+        const sendEmail = ses.sendEmail(params).promise();
+        sendEmail
+            .then((data) => {
+                console.log( data )
+                resolve()
+            })
+            .catch((err)=>{
+                console.log(err)
+                reject(err)
+            })
     })
 }
 

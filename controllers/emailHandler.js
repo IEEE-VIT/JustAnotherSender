@@ -1,20 +1,22 @@
 const awsSes = require("./awsSes")
 
-const arrayEmailSender = (emails, html, sender, subject, nameOfEmail)=>{
+const arrayEmailSender = (email, html, sender, subject, nameOfEmail)=>{
     return new Promise(async (resolve, reject)=>{
         try{
-            const resp = await awsSes.awsMailer(emails, html, sender, subject, nameOfEmail)
+            email.forEach((oneEmail)=>{
+                awsSes.awsMailer([oneEmail], html, sender, subject, nameOfEmail)
+            })
             resolve({
                 apiStatus: 1,
+                apiMsg: "Request Accepted",
                 payload: {
                     msg: "Emails are Being Sent",
-                    emailsExtracted: emails,
-                    ...resp
                 }
             })
         } catch(err){
             reject({
                 apiStatus: 5,
+                apiMsg: "Request Rejected",
                 payload: {
                     msg: "Service Not currently available!",
                     errorMsg: err.message
