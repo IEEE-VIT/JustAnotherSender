@@ -1,6 +1,6 @@
 const validateExternalReq = (req, res, next)=>{
     try{
-        console.log("request: "+req.body)
+        console.log(req.body)
         const email = req.body.email
         const html = req.body.html
         const sender = req.body.sender
