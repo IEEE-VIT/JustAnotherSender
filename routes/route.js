@@ -1,5 +1,4 @@
 const app = require("express")()
-const arrayEmail = require("../middlewares/arrayEmail")
 const emailHandler = require("../controllers/emailHandler")
 const validateExternalReq = require("../middlewares/validateExternalReq")
 

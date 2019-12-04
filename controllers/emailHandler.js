@@ -28,5 +28,4 @@ const arrayEmailSender = (email, html, sender, subject, nameOfEmail)=>{
 
 module.exports = {
     arrayEmailSender,
-    extractEmails
 }
