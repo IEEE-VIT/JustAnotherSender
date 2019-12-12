@@ -11,9 +11,11 @@ mailing services.
 ### The API can be locally started by following the below steps
 1. Make an .env file in the root directory of the project
 2. Add the following credentials to the .env
-    ACCESS_KEY_ID = "This should contain the access key ID of the AWS-SES"
-    SECRET_ACCESS_KEY = "This should contain the secret access key"
-    SECRET = "This will be your custom secret for your Apps to validate there requests to API"
+
+    - ACCESS_KEY_ID = "This should contain the access key ID of the AWS-SES"
+    - SECRET_ACCESS_KEY = "This should contain the secret access key"
+    - SECRET = "This will be your custom secret for your Apps to validate there requests to API"
+
 3. Run "npm i" followed by "npm run dev"
 
 ### Routes 
